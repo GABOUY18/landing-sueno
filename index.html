@@ -1,18 +1,16 @@
-**Landing Page HTML Mejorada – Versión más humana y visualmente profesional**
 
-```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Duerme Mejor | Tu espacio para descansar</title>
   <style>
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to bottom right, #f5f7fa, #c3cfe2);
-      color: #212529;
+      background: linear-gradient(to bottom right, #f0f4f8, #d9e2ec);
+      color: #1f2937;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -20,82 +18,88 @@
     }
     header {
       text-align: center;
-      padding: 3rem 1rem 1rem;
+      padding: 3rem 1rem 2rem;
     }
     header h1 {
-      font-size: 2.5rem;
+      font-size: 3rem;
       margin-bottom: 1rem;
-      color: #2b2d42;
+      color: #0f172a;
     }
     header p {
       font-size: 1.2rem;
-      max-width: 600px;
+      max-width: 640px;
       margin: 0 auto;
-      color: #495057;
+      color: #475569;
     }
     .features {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 1.5rem;
+      gap: 2rem;
       padding: 2rem 1rem;
-      max-width: 700px;
+      max-width: 900px;
     }
     .feature {
       background: #ffffff;
-      border-radius: 12px;
-      padding: 1.5rem;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+      transition: transform 0.3s ease;
+    }
+    .feature:hover {
+      transform: translateY(-5px);
     }
     .feature h2 {
-      color: #343a40;
-      font-size: 1.4rem;
+      font-size: 1.5rem;
+      color: #0f172a;
       margin-bottom: 0.5rem;
     }
     .feature p {
-      color: #6c757d;
+      color: #64748b;
+      font-size: 1rem;
     }
     .cta {
       background-color: #ffffff;
-      padding: 2rem 1rem;
-      border-radius: 12px;
-      max-width: 600px;
+      padding: 2.5rem 1rem;
+      border-radius: 16px;
+      max-width: 700px;
       text-align: center;
       margin: 2rem;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
     }
     .cta h2 {
       margin-bottom: 1rem;
-      font-size: 1.8rem;
-      color: #2b2d42;
+      font-size: 2rem;
+      color: #0f172a;
     }
     .cta p {
       font-size: 1.1rem;
-      color: #495057;
+      color: #475569;
     }
     form {
       display: flex;
       flex-direction: column;
       gap: 1rem;
-      margin-top: 1rem;
+      margin-top: 1.5rem;
     }
     input, button {
-      padding: 0.75rem;
-      border: 1px solid #ced4da;
-      border-radius: 8px;
+      padding: 0.9rem;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
       font-size: 1rem;
     }
     input {
-      background: #f8f9fa;
-      color: #212529;
+      background: #f8fafc;
+      color: #1f2937;
     }
     button {
-      background-color: #457b9d;
+      background-color: #2563eb;
       color: #fff;
       cursor: pointer;
       transition: background-color 0.3s ease;
+      font-weight: bold;
     }
     button:hover {
-      background-color: #1d3557;
+      background-color: #1d4ed8;
     }
     @media(min-width: 768px) {
       .features {
@@ -133,15 +137,209 @@
     <h2>¿Te cuesta dormir bien?</h2>
     <p>Registrate para recibir consejos naturales, apoyo personalizado y enterarte antes que nadie del lanzamiento de nuestra app.</p>
     <form>
-      <input type="text" name="nombre" placeholder="Nombre completo" required>
-      <input type="email" name="email" placeholder="Correo electrónico" required>
-      <input type="text" name="ciudad" placeholder="Ciudad de residencia" required>
-      <input type="number" name="edad" placeholder="Edad" required>
+      <input type="text" name="nombre" placeholder="Nombre completo" required />
+      <input type="email" name="email" placeholder="Correo electrónico" required />
+      <input list="paises" name="pais" placeholder="País de residencia" required />
+      <datalist id="paises">
+        <datalist id="paises">
+  <option value="Afganistán">
+  <option value="Albania">
+  <option value="Alemania">
+  <option value="Andorra">
+  <option value="Angola">
+  <option value="Antigua y Barbuda">
+  <option value="Arabia Saudita">
+  <option value="Argelia">
+  <option value="Argentina">
+  <option value="Armenia">
+  <option value="Australia">
+  <option value="Austria">
+  <option value="Azerbaiyán">
+  <option value="Bahamas">
+  <option value="Bangladés">
+  <option value="Barbados">
+  <option value="Baréin">
+  <option value="Bélgica">
+  <option value="Belice">
+  <option value="Benín">
+  <option value="Bielorrusia">
+  <option value="Birmania">
+  <option value="Bolivia">
+  <option value="Bosnia y Herzegovina">
+  <option value="Botsuana">
+  <option value="Brasil">
+  <option value="Brunéi">
+  <option value="Bulgaria">
+  <option value="Burkina Faso">
+  <option value="Burundi">
+  <option value="Bután">
+  <option value="Cabo Verde">
+  <option value="Camboya">
+  <option value="Camerún">
+  <option value="Canadá">
+  <option value="Catar">
+  <option value="Chad">
+  <option value="Chile">
+  <option value="China">
+  <option value="Chipre">
+  <option value="Colombia">
+  <option value="Comoras">
+  <option value="Corea del Norte">
+  <option value="Corea del Sur">
+  <option value="Costa de Marfil">
+  <option value="Costa Rica">
+  <option value="Croacia">
+  <option value="Cuba">
+  <option value="Dinamarca">
+  <option value="Dominica">
+  <option value="Ecuador">
+  <option value="Egipto">
+  <option value="El Salvador">
+  <option value="Emiratos Árabes Unidos">
+  <option value="Eritrea">
+  <option value="Eslovaquia">
+  <option value="Eslovenia">
+  <option value="España">
+  <option value="Estados Unidos">
+  <option value="Estonia">
+  <option value="Esuatini">
+  <option value="Etiopía">
+  <option value="Filipinas">
+  <option value="Finlandia">
+  <option value="Fiyi">
+  <option value="Francia">
+  <option value="Gabón">
+  <option value="Gambia">
+  <option value="Georgia">
+  <option value="Ghana">
+  <option value="Granada">
+  <option value="Grecia">
+  <option value="Guatemala">
+  <option value="Guinea">
+  <option value="Guinea-Bisáu">
+  <option value="Guinea Ecuatorial">
+  <option value="Guyana">
+  <option value="Haití">
+  <option value="Honduras">
+  <option value="Hungría">
+  <option value="India">
+  <option value="Indonesia">
+  <option value="Irak">
+  <option value="Irán">
+  <option value="Irlanda">
+  <option value="Islandia">
+  <option value="Islas Marshall">
+  <option value="Islas Salomón">
+  <option value="Israel">
+  <option value="Italia">
+  <option value="Jamaica">
+  <option value="Japón">
+  <option value="Jordania">
+  <option value="Kazajistán">
+  <option value="Kenia">
+  <option value="Kirguistán">
+  <option value="Kiribati">
+  <option value="Kuwait">
+  <option value="Laos">
+  <option value="Lesoto">
+  <option value="Letonia">
+  <option value="Líbano">
+  <option value="Liberia">
+  <option value="Libia">
+  <option value="Liechtenstein">
+  <option value="Lituania">
+  <option value="Luxemburgo">
+  <option value="Madagascar">
+  <option value="Malasia">
+  <option value="Malaui">
+  <option value="Maldivas">
+  <option value="Malí">
+  <option value="Malta">
+  <option value="Marruecos">
+  <option value="Mauricio">
+  <option value="Mauritania">
+  <option value="México">
+  <option value="Micronesia">
+  <option value="Moldavia">
+  <option value="Mónaco">
+  <option value="Mongolia">
+  <option value="Montenegro">
+  <option value="Mozambique">
+  <option value="Namibia">
+  <option value="Nauru">
+  <option value="Nepal">
+  <option value="Nicaragua">
+  <option value="Níger">
+  <option value="Nigeria">
+  <option value="Noruega">
+  <option value="Nueva Zelanda">
+  <option value="Omán">
+  <option value="Países Bajos">
+  <option value="Pakistán">
+  <option value="Palaos">
+  <option value="Panamá">
+  <option value="Papúa Nueva Guinea">
+  <option value="Paraguay">
+  <option value="Perú">
+  <option value="Polonia">
+  <option value="Portugal">
+  <option value="Reino Unido">
+  <option value="República Centroafricana">
+  <option value="República Checa">
+  <option value="República del Congo">
+  <option value="República Democrática del Congo">
+  <option value="República Dominicana">
+  <option value="Ruanda">
+  <option value="Rumanía">
+  <option value="Rusia">
+  <option value="Samoa">
+  <option value="San Cristóbal y Nieves">
+  <option value="San Marino">
+  <option value="San Vicente y las Granadinas">
+  <option value="Santa Lucía">
+  <option value="Santo Tomé y Príncipe">
+  <option value="Senegal">
+  <option value="Serbia">
+  <option value="Seychelles">
+  <option value="Sierra Leona">
+  <option value="Singapur">
+  <option value="Siria">
+  <option value="Somalia">
+  <option value="Sri Lanka">
+  <option value="Sudáfrica">
+  <option value="Sudán">
+  <option value="Sudán del Sur">
+  <option value="Suecia">
+  <option value="Suiza">
+  <option value="Surinam">
+  <option value="Tailandia">
+  <option value="Tanzania">
+  <option value="Tayikistán">
+  <option value="Timor Oriental">
+  <option value="Togo">
+  <option value="Tonga">
+  <option value="Trinidad y Tobago">
+  <option value="Túnez">
+  <option value="Turkmenistán">
+  <option value="Turquía">
+  <option value="Tuvalu">
+  <option value="Ucrania">
+  <option value="Uganda">
+  <option value="Uruguay">
+  <option value="Uzbekistán">
+  <option value="Vanuatu">
+  <option value="Vaticano">
+  <option value="Venezuela">
+  <option value="Vietnam">
+  <option value="Yemen">
+  <option value="Yibuti">
+  <option value="Zambia">
+  <option value="Zimbabue">
+</datalist>
+      </datalist>
+      <input type="number" name="edad" placeholder="Edad" required />
       <button type="submit">Quiero mejorar mi sueño</button>
     </form>
   </section>
 </body>
 </html>
-```
-
-
