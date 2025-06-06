@@ -1,0 +1,147 @@
+**Landing Page HTML Mejorada – Versión más humana y visualmente profesional**
+
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Duerme Mejor | Tu espacio para descansar</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom right, #f5f7fa, #c3cfe2);
+      color: #212529;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0;
+    }
+    header {
+      text-align: center;
+      padding: 3rem 1rem 1rem;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #2b2d42;
+    }
+    header p {
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 auto;
+      color: #495057;
+    }
+    .features {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      padding: 2rem 1rem;
+      max-width: 700px;
+    }
+    .feature {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .feature h2 {
+      color: #343a40;
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+    }
+    .feature p {
+      color: #6c757d;
+    }
+    .cta {
+      background-color: #ffffff;
+      padding: 2rem 1rem;
+      border-radius: 12px;
+      max-width: 600px;
+      text-align: center;
+      margin: 2rem;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    }
+    .cta h2 {
+      margin-bottom: 1rem;
+      font-size: 1.8rem;
+      color: #2b2d42;
+    }
+    .cta p {
+      font-size: 1.1rem;
+      color: #495057;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    input, button {
+      padding: 0.75rem;
+      border: 1px solid #ced4da;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+    input {
+      background: #f8f9fa;
+      color: #212529;
+    }
+    button {
+      background-color: #457b9d;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #1d3557;
+    }
+    @media(min-width: 768px) {
+      .features {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>¿Problemas para dormir?</h1>
+    <p>Descubrí una manera natural, empática y accesible de mejorar tu descanso. Tu bienestar nocturno empieza con pequeños pasos.</p>
+  </header>
+
+  <section class="features">
+    <div class="feature">
+      <h2>🌙 Rutinas guiadas</h2>
+      <p>Transformá tus noches con prácticas relajantes creadas para ayudarte a desconectar y relajarte.</p>
+    </div>
+    <div class="feature">
+      <h2>🧠 Espacio de acompañamiento</h2>
+      <p>Te brindamos herramientas para que no te sientas solo en el proceso de mejorar tu descanso. Estamos acá para ayudarte.</p>
+    </div>
+    <div class="feature">
+      <h2>⏰ Recordatorios personalizados</h2>
+      <p>Creá hábitos saludables con ayuda de recordatorios adaptados a tu rutina diaria.</p>
+    </div>
+    <div class="feature">
+      <h2>🔒 Acceso anticipado a la app</h2>
+      <p>Registrate para estar entre los primeros usuarios en probar GRATIS nuestra solución cuando esté disponible.</p>
+    </div>
+  </section>
+
+  <section class="cta">
+    <h2>¿Te cuesta dormir bien?</h2>
+    <p>Registrate para recibir consejos naturales, apoyo personalizado y enterarte antes que nadie del lanzamiento de nuestra app.</p>
+    <form>
+      <input type="text" name="nombre" placeholder="Nombre completo" required>
+      <input type="email" name="email" placeholder="Correo electrónico" required>
+      <input type="text" name="ciudad" placeholder="Ciudad de residencia" required>
+      <input type="number" name="edad" placeholder="Edad" required>
+      <button type="submit">Quiero mejorar mi sueño</button>
+    </form>
+  </section>
+</body>
+</html>
+```
+
+
