@@ -9,8 +9,8 @@
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to bottom right, #f0f4f8, #d9e2ec);
-      color: #1f2937;
+      background: linear-gradient(to bottom right, #e0f7fa, #c8e6c9);
+      color: #2e3c4f;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -23,13 +23,13 @@
     header h1 {
       font-size: 3rem;
       margin-bottom: 1rem;
-      color: #0f172a;
+      color: #1a202c;
     }
     header p {
       font-size: 1.2rem;
       max-width: 640px;
       margin: 0 auto;
-      color: #475569;
+      color: #4a5568;
     }
     .features {
       display: grid;
@@ -50,11 +50,11 @@
     }
     .feature h2 {
       font-size: 1.5rem;
-      color: #0f172a;
+      color: #1a202c;
       margin-bottom: 0.5rem;
     }
     .feature p {
-      color: #64748b;
+      color: #5a6779;
       font-size: 1rem;
     }
     .cta {
@@ -69,11 +69,11 @@
     .cta h2 {
       margin-bottom: 1rem;
       font-size: 2rem;
-      color: #0f172a;
+      color: #1a202c;
     }
     .cta p {
       font-size: 1.1rem;
-      color: #475569;
+      color: #4a5568;
     }
     form {
       display: flex;
@@ -89,17 +89,17 @@
     }
     input {
       background: #f8fafc;
-      color: #1f2937;
+      color: #2e3c4f;
     }
     button {
-      background-color: #2563eb;
+      background-color: #00897b;
       color: #fff;
       cursor: pointer;
       transition: background-color 0.3s ease;
       font-weight: bold;
     }
     button:hover {
-      background-color: #1d4ed8;
+      background-color: #00796b;
     }
     @media(min-width: 768px) {
       .features {
@@ -117,7 +117,7 @@
   <section class="features">
     <div class="feature">
       <h2>🌙 Rutinas guiadas</h2>
-      <p>Transformá tus noches con prácticas relajantes creadas para ayudarte a desconectar y relajarte.</p>
+      <p>Transformá tus noches con prácticas creadas para ayudarte a desconectar y relajarte.</p>
     </div>
     <div class="feature">
       <h2>🧠 Espacio de acompañamiento</h2>
@@ -341,5 +341,23 @@
       <button type="submit">Quiero mejorar mi sueño</button>
     </form>
   </section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const form = document.querySelector("form");
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+      form.style.display = "none";
+      const message = document.createElement("p");
+      message.innerHTML = "<strong>Tus datos fueron enviados con éxito.</strong><br>Pronto recibirás novedades para mejorar tu sueño.";
+      message.style.fontSize = "1.3rem";
+      message.style.color = "#2e7d32";
+      message.style.marginTop = "2rem";
+      message.style.textAlign = "center";
+      form.parentElement.appendChild(message);
+    });
+  });
+</script>
 </body>
+
 </html>
