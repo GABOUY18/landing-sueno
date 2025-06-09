@@ -1,10 +1,17 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Duerme Mejor | Tu espacio para descansar</title>
+ <!-- Acá va Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-J5832CVR0J"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-J5832CVR0J');
+  </script>
   <style>
     body {
       margin: 0;
@@ -137,10 +144,9 @@
     <h2>¿Te cuesta dormir bien?</h2>
     <p>Registrate para recibir consejos naturales, apoyo personalizado y enterarte antes que nadie del lanzamiento de nuestra app.</p>
     <form>
-      <input type="text" name="nombre" placeholder="Nombre completo" required />
-      <input type="email" name="email" placeholder="Correo electrónico" required />
-      <input list="paises" name="pais" placeholder="País de residencia" required />
-      <datalist id="paises">
+    	<input type="text" name="nombre" placeholder="Nombre completo" required />
+  	<input type="email" name="email" placeholder="Correo electrónico" required />
+  	<input list="paises" name="pais" placeholder="País de residencia" required />
         <datalist id="paises">
   <option value="Afganistán">
   <option value="Albania">
