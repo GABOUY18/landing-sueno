@@ -346,17 +346,41 @@
     const form = document.querySelector("form");
     form.addEventListener("submit", function(event) {
       event.preventDefault();
-      form.style.display = "none";
-      const message = document.createElement("p");
-      message.innerHTML = "<strong>Tus datos fueron enviados con éxito.</strong><br>Pronto recibirás novedades para mejorar tu sueño.";
-      message.style.fontSize = "1.3rem";
-      message.style.color = "#2e7d32";
-      message.style.marginTop = "2rem";
-      message.style.textAlign = "center";
-      form.parentElement.appendChild(message);
+
+      const data = {
+        nombre: form.nombre.value,
+        email: form.email.value,
+        pais: form.pais.value,
+        edad: form.edad.value
+      };
+
+      fetch("https://https://script.google.com/macros/s/AKfycbyoDCwJyxk9d0kPDxGpdsR_BgjIqF2IrwKlV2F2yRogpKEnChW2iy2F1kKl4yaAdj1L/exec", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+      .then(response => response.json())
+      .then(result => {
+        if(result.result === "success") {
+          form.style.display = "none";
+          const message = document.createElement("p");
+          message.innerHTML = "<strong>Tus datos fueron enviados con éxito.</strong><br>Pronto recibirás novedades para mejorar tu sueño.";
+          message.style.fontSize = "1.3rem";
+          message.style.color = "#2e7d32";
+          message.style.marginTop = "2rem";
+          message.style.textAlign = "center";
+          form.parentElement.appendChild(message);
+        } else {
+          alert("Error al enviar los datos.");
+        }
+      })
+      .catch(() => alert("Error al conectar con el servidor."));
     });
   });
 </script>
 </body>
+
 
 </html>
