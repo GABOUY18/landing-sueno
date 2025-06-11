@@ -136,63 +136,65 @@
     <h2>¿Te cuesta dormir bien?</h2>
     <p>Registrate para recibir consejos naturales, apoyo personalizado y enterarte antes que nadie del lanzamiento de nuestra app.</p>
     <form id="registro-form">
-      <input type="text" name="nombre" placeholder="Nombre completo" required />
-      <input type="email" name="email" placeholder="Correo electrónico" required />
-      <input list="paises" name="pais" placeholder="País de residencia" required />
+      <input type="text" id="nombre" name="nombre" placeholder="Nombre completo" required />
+      <input type="email" id="email" name="email" placeholder="Correo electrónico" required />
+      <input list="paises" id="pais" name="pais" placeholder="País de residencia" required />
       <datalist id="paises">
         <option value="Argentina">
         <option value="Uruguay">
         <option value="México">
         <option value="España">
         <option value="Colombia">
-        <!-- Más países ya incluidos -->
       </datalist>
-      <input type="number" name="edad" placeholder="Edad" required />
+      <input type="number" id="edad" name="edad" placeholder="Edad" required />
       <button type="submit">Quiero mejorar mi sueño</button>
     </form>
   </section>
 
-  
-</body>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const form = document.querySelector("form");
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const formulario = document.getElementById("registro-form");
+      const nombreInput = document.getElementById("nombre");
+      const emailInput = document.getElementById("email");
+      const paisSelect = document.getElementById("pais");
+      const edadInput = document.getElementById("edad");
 
-    formulario.addEventListener("submit", async function (e) {
-  e.preventDefault();
+      formulario.addEventListener("submit", async function (e) {
+        e.preventDefault();
 
-  const datos = {
-    nombre: nombreInput.value,
-    email: emailInput.value,
-    pais: paisSelect.value,
-    edad: edadInput.value
-  };
+        const datos = {
+          nombre: nombreInput.value,
+          email: emailInput.value,
+          pais: paisSelect.value,
+          edad: edadInput.value
+        };
 
-  try {
-    const respuesta = await fetch("https://script.google.com/macros/s/AKfycbzIkI1wNKyd0WG6AfZfVYR0nUzMg4qoa5iesCRjT529Ky2Bn6HnhCYEzwrEqzjSGUmX/exec", {
-      method: "POST",
-      body: JSON.stringify(datos),
-      headers: {
-        "Content-Type": "application/json"
-      }
+        try {
+          const respuesta = await fetch("https://script.google.com/macros/s/AKfycbzIkI1wNKyd0WG6AfZfVYR0nUzMg4qoa5iesCRjT529Ky2Bn6HnhCYEzwrEqzjSGUmX/exec", {
+            method: "POST",
+            body: JSON.stringify(datos),
+            headers: {
+              "Content-Type": "application/json"
+            }
+          });
+
+          const resultado = await respuesta.json();
+
+          if (resultado.status === "success") {
+            console.log("Datos enviados correctamente");
+            alert("¡Gracias por registrarte! Pronto recibirás novedades.");
+            formulario.reset();
+          } else {
+            throw new Error("Fallo al guardar");
+          }
+        } catch (error) {
+          console.error("Error al enviar datos:", error);
+          alert("Ocurrió un error al enviar los datos.");
+        }
+      });
     });
-
-    const resultado = await respuesta.json();
-
-    if (resultado.status === "success") {
-      console.log("Datos enviados correctamente");
-      // Aquí podés mostrar overlay o mensaje de éxito
-    } else {
-      throw new Error("Fallo al guardar");
-    }
-  } catch (error) {
-    console.error("Error al enviar datos:", error);
-    alert("Ocurrió un error al enviar los datos.");
-  }
-});
-
-</script>
-
-
+  </script>
+</body>
 </html>
+
 
