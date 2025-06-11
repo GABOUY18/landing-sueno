@@ -188,7 +188,7 @@
     <div class="modal-content">
       <h3>¡Gracias por registrarte!</h3>
       <p>Te estaremos contactando pronto para ayudarte a dormir mejor.</p>
-      <button onclick="document.getElementById('confirmModal').style.display = 'none'">Cerrar</button>
+      <button id="closeModalBtn">Cerrar</button>
     </div>
   </div>
 
@@ -196,6 +196,7 @@
     document.addEventListener("DOMContentLoaded", () => {
       const form = document.getElementById("registro-form");
       const modal = document.getElementById("confirmModal");
+      const closeModalBtn = document.getElementById("closeModalBtn");
 
       form.addEventListener("submit", async function (e) {
         e.preventDefault();
@@ -212,14 +213,13 @@
 
         const datos = new URLSearchParams({
           nombre,
-          correo: email,
+          correo: email,  // coincidir con Apps Script
           pais,
-          edad,
-          fecha: new Date().toISOString()
+          edad
         });
 
         try {
-          const respuesta = await fetch("https://script.google.com/macros/s/AKfycbx8CEHBEnfPLkhKpoWIsYs5-GgP43YuF8of--LUMsS7SdJFBj_yzU8ns3bgWbK2P3z4/exec", {
+          const respuesta = await fetch("https://script.google.com/macros/s/AKfycbzLVZxdxYI4yo5QhD36PhHLAECriIkcUQYsyiVamPbGhQ07c_pFTguk4x60FrHX7mOp/exec", {
             method: "POST",
             headers: {
               "Content-Type": "application/x-www-form-urlencoded"
@@ -240,6 +240,11 @@
           console.error("Error al enviar:", error);
           alert("Ocurrió un error al enviar los datos.");
         }
+      });
+
+      closeModalBtn.addEventListener("click", () => {
+        modal.style.display = "none";
+        form.nombre.focus();
       });
     });
   </script>
