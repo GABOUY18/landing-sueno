@@ -200,44 +200,46 @@
       const modal = document.getElementById("confirmModal");
 
       form.addEventListener("submit", async function (e) {
-        e.preventDefault();
+  e.preventDefault();
 
-        const nombre = form.nombre.value.trim();
-        const email = form.email.value.trim();
-        const pais = form.pais.value.trim();
-        const edad = form.edad.value.trim();
+  const nombre = form.nombre.value.trim();
+  const email = form.email.value.trim();
+  const pais = form.pais.value.trim();
+  const edad = form.edad.value.trim();
 
-        if (!nombre || !email || !pais || !edad) {
-          alert("Por favor, completá todos los campos.");
-          return;
-        }
+  if (!nombre || !email || !pais || !edad) {
+    alert("Por favor, completá todos los campos.");
+    return;
+  }
 
-        const datos = new URLSearchParams({
-          nombre, email, pais, edad,
-          fecha: new Date().toISOString()
-        });
+  const datos = new URLSearchParams({
+    nombre, email, pais, edad,
+    fecha: new Date().toISOString()
+  });
 
-        try {
-          const respuesta = await fetch("https://script.google.com/macros/s/AKfycby2YoMM1VogPghOkh172V9DjvZdc-4tNhlB-iFWqtnVF3yrSZbhpBwIdoYztIVMvSAH/exec", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded"
-            },
-            body: datos.toString()
-          });
+  try {
+    const respuesta = await fetch("https://script.google.com/macros/s/AKfycbyAevCS4t_HoxNEFh_ApyXmN3L9fSYXRJtnBroN8HOoxSkhFdxSjBKeergeujFFnbFP/exec", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      body: datos.toString()
+    });
 
-          const texto = await respuesta.text();
-          const resultado = JSON.parse(texto);
+    const resultado = await respuesta.json();
 
-          if (resultado.status === "success") {
-            form.reset();
-            modal.style.display = "flex";
-          } else {
-            throw new Error("Respuesta inválida del servidor");
-          }
-        } catch (error) {
-          console.error("Error al enviar:", error);
-          alert("Ocurrió un error al enviar los datos.");
+    if (resultado.status === "success") {
+      form.reset();
+      modal.style.display = "flex";
+    } else {
+      throw new Error("Respuesta inválida del servidor");
+    }
+  } catch (error) {
+    console.error("Error al enviar:", error);
+    alert("Ocurrió un error al enviar los datos.");
+  }
+});
+
         }
       });
     });
