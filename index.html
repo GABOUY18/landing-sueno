@@ -107,7 +107,6 @@
       }
     }
 
-    /* Modal de confirmación */
     #confirmModal {
       position: fixed;
       top: 0; left: 0;
@@ -185,7 +184,6 @@
     </form>
   </section>
 
-  <!-- Modal de confirmación -->
   <div id="confirmModal">
     <div class="modal-content">
       <h3>¡Gracias por registrarte!</h3>
@@ -214,14 +212,14 @@
 
         const datos = new URLSearchParams({
           nombre,
-          correo: email, // Coincide con Google Script
+          correo: email,
           pais,
           edad,
           fecha: new Date().toISOString()
         });
 
         try {
-          const respuesta = await fetch("https://script.google.com/macros/s/AKfycbySEgtbsoJuh4VjGMdxYjxyP57DQ3BRuGG79iptmONHY2Z69pafNirNR_jtTiWi8duw/exec", {
+          const respuesta = await fetch("https://script.google.com/macros/s/AKfycbx8CEHBEnfPLkhKpoWIsYs5-GgP43YuF8of--LUMsS7SdJFBj_yzU8ns3bgWbK2P3z4/exec", {
             method: "POST",
             headers: {
               "Content-Type": "application/x-www-form-urlencoded"
