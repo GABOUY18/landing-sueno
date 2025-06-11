@@ -222,39 +222,40 @@
       const mensajeExito = document.getElementById("mensaje-exito");
 
       form.addEventListener("submit", async function (e) {
-        e.preventDefault();
+  e.preventDefault();
 
-        const datos = {
-          nombre: form.nombre.value.trim(),
-          email: form.email.value.trim(),
-          pais: form.pais.value.trim(),
-          edad: form.edad.value.trim()
-        };
+  const nombre = form.querySelector('input[name="nombre"]').value;
+  const email = form.querySelector('input[name="email"]').value;
+  const pais = form.querySelector('input[name="pais"]').value;
+  const edad = form.querySelector('input[name="edad"]').value;
 
-        try {
-          const respuesta = await fetch("https://script.google.com/macros/s/AKfycbxmw8KirhPiaX5hSgGg1UBdsICj2jic6InTufyTio4dmCXHzNnkhBlxzzx-N7ExG7Rt/exec", {
-            method: "POST",
-            body: JSON.stringify(datos),
-            headers: {
-              "Content-Type": "application/json"
-            }
-          });
+  const datos = new URLSearchParams({
+    nombre,
+    email,
+    pais,
+    edad
+  });
 
-          const resultado = await respuesta.json();
-
-          if (resultado.status === "success") {
-            form.reset();
-            form.style.display = "none";
-            mensajeExito.style.display = "block";
-          } else {
-            throw new Error("Fallo al guardar");
-          }
-        } catch (error) {
-          console.error("Error al enviar datos:", error);
-          alert("Ocurrió un error al enviar los datos.");
-        }
-      });
+  try {
+    const respuesta = await fetch("https://script.google.com/macros/s/AKfycbxA8zHs-IfFZP1MzU9alRuq-4lZMPdSL-7_uragzv4n_UmP3IURh7ZTrBdbDpreHMNo/exec", {
+      method: "POST",
+      body: datos,
     });
+
+    const resultado = await respuesta.json();
+
+    if (resultado.status === "success") {
+      alert("¡Gracias por registrarte!");
+      form.reset();
+    } else {
+      throw new Error("Fallo al guardar");
+    }
+  } catch (error) {
+    console.error("Error al enviar datos:", error);
+    alert("Ocurrió un error al enviar los datos.");
+  }
+});
+
   </script>
 </body>
 </html>
