@@ -195,51 +195,48 @@
   </div>
 
   <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const form = document.getElementById("registro-form");
-    const modal = document.getElementById("confirmModal");
+  form.addEventListener("submit", async function (e) {
+  e.preventDefault();
 
-    form.addEventListener("submit", async function (e) {
-      e.preventDefault();
+  const nombre = form.nombre.value.trim();
+  const email = form.email.value.trim();
+  const pais = form.pais.value.trim();
+  const edad = form.edad.value.trim();
 
-      const nombre = form.nombre.value.trim();
-      const email = form.email.value.trim();
-      const pais = form.pais.value.trim();
-      const edad = form.edad.value.trim();
+  if (!nombre || !email || !pais || !edad) {
+    alert("Por favor, completá todos los campos.");
+    return;
+  }
 
-      if (!nombre || !email || !pais || !edad) {
-        alert("Por favor, completá todos los campos.");
-        return;
-      }
-
-      const datos = new URLSearchParams({
-        nombre, email, pais, edad,
-        fecha: new Date().toISOString()
-      });
-
-      try {
-        const respuesta = await fetch("https://script.google.com/macros/s/AKfycbw4zLkA2Q14oTIGSfPhzP9umzpD6ORSBMwUOVrE592RqMqyVooboJWOnCTAcTEQiZPD/exec", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
-          },
-          body: datos.toString()
-        });
-
-        const resultado = await respuesta.json();
-
-        if (resultado.status === "success") {
-          form.reset();
-          modal.style.display = "flex";
-        } else {
-          throw new Error("Respuesta inválida del servidor");
-        }
-      } catch (error) {
-        console.error("Error al enviar:", error);
-        alert("Ocurrió un error al enviar los datos.");
-      }
-    });
+  const datos = new URLSearchParams({
+    nombre, email, pais, edad,
+    fecha: new Date().toISOString()
   });
+
+  try {
+    const respuesta = await fetch("https://script.google.com/macros/s/AKfycbx51TYfCacmhpkR9SWiIpVWaGidp79I5cfQcJZmWRzBLTcJaPRQoEy5W2Muz7ISphnh/exec", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      body: datos.toString()
+    });
+
+    const resultado = await respuesta.json();
+    console.log("Respuesta del servidor:", resultado);
+
+    if (resultado.status === "success") {
+      form.reset();
+      modal.style.display = "flex";
+    } else {
+      throw new Error("Respuesta inválida del servidor");
+    }
+  } catch (error) {
+    console.error("Error al enviar:", error);
+    alert("Ocurrió un error al enviar los datos.");
+  }
+});
+
 </script>
 </body>
 </html>
