@@ -158,38 +158,39 @@
   document.addEventListener("DOMContentLoaded", function () {
     const form = document.querySelector("form");
 
-    form.addEventListener("submit", function (event) {
-      event.preventDefault();
+    formulario.addEventListener("submit", async function (e) {
+  e.preventDefault();
 
-      const datos = {
-        nombre: form.nombre.value.trim(),
-        email: form.email.value.trim(),
-        pais: form.pais.value.trim(),
-        edad: form.edad.value.trim()
-      };
+  const datos = {
+    nombre: nombreInput.value,
+    email: emailInput.value,
+    pais: paisSelect.value,
+    edad: edadInput.value
+  };
 
-      fetch("https://script.google.com/macros/s/AKfycbxBV-IkClHO0R9mg2aX2qRkO3_xV2ShpNEOCFxOOHYf9LrWWhzjkzOKHc8L3xjyNUJb/exec", {
-        method: "POST",
-        body: JSON.stringify(datos),
-        headers: {
-          "Content-Type": "application/json"
-        }
-      })
-      .then(res => res.text())
-      .then(respuesta => {
-        if (respuesta === "OK") {
-          alert("¡Gracias! Tus datos fueron enviados correctamente.");
-          form.reset();
-        } else {
-          alert("Ocurrió un error. Intentá nuevamente.");
-        }
-      })
-      .catch(error => {
-        console.error("Error:", error);
-        alert("Error al enviar datos.");
-      });
+  try {
+    const respuesta = await fetch("https://script.google.com/macros/s/AKfycbzIkI1wNKyd0WG6AfZfVYR0nUzMg4qoa5iesCRjT529Ky2Bn6HnhCYEzwrEqzjSGUmX/exec", {
+      method: "POST",
+      body: JSON.stringify(datos),
+      headers: {
+        "Content-Type": "application/json"
+      }
     });
-  });
+
+    const resultado = await respuesta.json();
+
+    if (resultado.status === "success") {
+      console.log("Datos enviados correctamente");
+      // Aquí podés mostrar overlay o mensaje de éxito
+    } else {
+      throw new Error("Fallo al guardar");
+    }
+  } catch (error) {
+    console.error("Error al enviar datos:", error);
+    alert("Ocurrió un error al enviar los datos.");
+  }
+});
+
 </script>
 
 
