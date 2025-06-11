@@ -4,6 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Duerme Mejor | Tu espacio para descansar</title>
+
+  <!-- META TAGS PARA SEO Y SOCIAL MEDIA -->
+  <meta name="description" content="Duerme Mejor: tu espacio para mejorar el descanso con rutinas guiadas, apoyo personalizado y recordatorios saludables.">
+  <meta property="og:title" content="Duerme Mejor | Tu espacio para descansar">
+  <meta property="og:description" content="Registrate gratis y accedé a herramientas para mejorar tu sueño de forma natural y acompañada.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="URL-de-tu-imagen.jpg">
+  <meta property="og:url" content="https://tusitio.com">
+
   <style>
     body {
       margin: 0;
@@ -13,23 +22,26 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 0;
     }
+
     header {
       text-align: center;
       padding: 3rem 1rem 2rem;
     }
+
     header h1 {
       font-size: 3rem;
       margin-bottom: 1rem;
       color: #1a202c;
     }
+
     header p {
       font-size: 1.2rem;
       max-width: 640px;
       margin: 0 auto;
       color: #4a5568;
     }
+
     .features {
       display: grid;
       grid-template-columns: 1fr;
@@ -37,6 +49,7 @@
       padding: 2rem 1rem;
       max-width: 900px;
     }
+
     .feature {
       background: #ffffff;
       border-radius: 16px;
@@ -44,18 +57,22 @@
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
       transition: transform 0.3s ease;
     }
+
     .feature:hover {
       transform: translateY(-5px);
     }
+
     .feature h2 {
       font-size: 1.5rem;
       color: #1a202c;
       margin-bottom: 0.5rem;
     }
+
     .feature p {
       color: #5a6779;
       font-size: 1rem;
     }
+
     .cta {
       background-color: #ffffff;
       padding: 2.5rem 1rem;
@@ -65,31 +82,51 @@
       margin: 2rem;
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
     }
+
     .cta h2 {
       margin-bottom: 1rem;
       font-size: 2rem;
       color: #1a202c;
     }
+
     .cta p {
       font-size: 1.1rem;
       color: #4a5568;
     }
+
     form {
       display: flex;
       flex-direction: column;
       gap: 1rem;
       margin-top: 1.5rem;
     }
+
+    label {
+      position: absolute;
+      left: -9999px;
+      top: auto;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+
     input, button {
       padding: 0.9rem;
       border: 1px solid #cbd5e1;
       border-radius: 10px;
       font-size: 1rem;
     }
+
     input {
       background: #f8fafc;
       color: #2e3c4f;
     }
+
+    input:focus {
+      outline: 2px solid #00897b;
+      background-color: #ffffff;
+    }
+
     button {
       background-color: #00897b;
       color: #fff;
@@ -97,9 +134,23 @@
       transition: background-color 0.3s ease;
       font-weight: bold;
     }
+
     button:hover {
       background-color: #00796b;
     }
+
+    .success-message {
+      font-size: 1.2rem;
+      color: #2e7d32;
+      margin-top: 1rem;
+      animation: fadeIn 0.5s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     @media(min-width: 768px) {
       .features {
         grid-template-columns: repeat(2, 1fr);
@@ -135,42 +186,53 @@
   <section class="cta">
     <h2>¿Te cuesta dormir bien?</h2>
     <p>Registrate para recibir consejos naturales, apoyo personalizado y enterarte antes que nadie del lanzamiento de nuestra app.</p>
-    <form id="registro-form">
+    
+    <form id="registro-form" role="form" aria-label="Formulario de registro">
+      <label for="nombre">Nombre completo</label>
       <input type="text" id="nombre" name="nombre" placeholder="Nombre completo" required />
+
+      <label for="email">Correo electrónico</label>
       <input type="email" id="email" name="email" placeholder="Correo electrónico" required />
-      <input list="paises" id="pais" name="pais" placeholder="País de residencia" required />
+
+      <label for="pais">País de residencia</label>
+      <input list="paises" id="pais" name="pais" placeholder="País de residencia" autocomplete="country" required />
       <datalist id="paises">
         <option value="Argentina">
         <option value="Uruguay">
         <option value="México">
         <option value="España">
         <option value="Colombia">
+        <!-- Más países ya incluidos -->
       </datalist>
-      <input type="number" id="edad" name="edad" placeholder="Edad" required />
+
+      <label for="edad">Edad</label>
+      <input type="number" id="edad" name="edad" placeholder="Edad" required min="10" max="100" />
+
       <button type="submit">Quiero mejorar mi sueño</button>
     </form>
+
+    <div id="mensaje-exito" class="success-message" style="display:none;">
+      ¡Gracias por registrarte! Te mantendremos informado 😊
+    </div>
   </section>
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      const formulario = document.getElementById("registro-form");
-      const nombreInput = document.getElementById("nombre");
-      const emailInput = document.getElementById("email");
-      const paisSelect = document.getElementById("pais");
-      const edadInput = document.getElementById("edad");
+      const form = document.getElementById("registro-form");
+      const mensajeExito = document.getElementById("mensaje-exito");
 
-      formulario.addEventListener("submit", async function (e) {
+      form.addEventListener("submit", async function (e) {
         e.preventDefault();
 
         const datos = {
-          nombre: nombreInput.value,
-          email: emailInput.value,
-          pais: paisSelect.value,
-          edad: edadInput.value
+          nombre: form.nombre.value.trim(),
+          email: form.email.value.trim(),
+          pais: form.pais.value.trim(),
+          edad: form.edad.value.trim()
         };
 
         try {
-          const respuesta = await fetch("https://script.google.com/macros/s/AKfycbzIkI1wNKyd0WG6AfZfVYR0nUzMg4qoa5iesCRjT529Ky2Bn6HnhCYEzwrEqzjSGUmX/exec", {
+          const respuesta = await fetch("https://script.google.com/macros/s/AKfycbxmw8KirhPiaX5hSgGg1UBdsICj2jic6InTufyTio4dmCXHzNnkhBlxzzx-N7ExG7Rt/exec", {
             method: "POST",
             body: JSON.stringify(datos),
             headers: {
@@ -181,9 +243,9 @@
           const resultado = await respuesta.json();
 
           if (resultado.status === "success") {
-            console.log("Datos enviados correctamente");
-            alert("¡Gracias por registrarte! Pronto recibirás novedades.");
-            formulario.reset();
+            form.reset();
+            form.style.display = "none";
+            mensajeExito.style.display = "block";
           } else {
             throw new Error("Fallo al guardar");
           }
@@ -196,5 +258,6 @@
   </script>
 </body>
 </html>
+
 
 
