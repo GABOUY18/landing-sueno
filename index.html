@@ -106,6 +106,7 @@
         grid-template-columns: repeat(2, 1fr);
       }
     }
+
     #confirmModal {
       position: fixed;
       top: 0; left: 0;
@@ -200,19 +201,45 @@
       form.addEventListener("submit", async function (e) {
         e.preventDefault();
 
-        const datos = new URLSearchParams(new FormData(form));
+        const nombre = form.nombre.value.trim();
+        const email = form.email.value.trim();
+        const pais = form.pais.value.trim();
+        const edad = form.edad.value.trim();
 
-        try {
-          await fetch("https://script.google.com/macros/s/AKfycbxE0TvC6jBuLw9ND4Hr7K9tyebbBWw9uLxtfDoTSZucBIZuF8dv1g9Gdesg_umR8nio/exec", {
-            method: "POST",
-            body: datos
-          });
-        } catch (error) {
-          console.warn("Error (ignorado) al enviar:", error);
+        if (!nombre || !email || !pais || !edad) {
+          alert("Por favor, completá todos los campos.");
+          return;
         }
 
-        form.reset();
-        modal.style.display = "flex";
+        const datos = new URLSearchParams({
+          nombre,
+          correo: email,  // coincidir con Apps Script
+          pais,
+          edad
+        });
+
+        try {
+          const respuesta = await fetch("https://script.google.com/macros/s/AKfycbx9k7RDQcvLOrvI5pnvtmf_bV3O5nbXCyJYaGE63I3jVdzT8NFRjNQVJSCki7F61G7r/exec", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: datos.toString()
+          });
+
+          const resultado = await respuesta.json();
+          console.log("Respuesta del servidor:", resultado);
+
+          if (resultado.success) {
+            form.reset();
+            modal.style.display = "flex";
+          } else {
+            throw new Error(resultado.message || "Error desconocido del servidor");
+          }
+        } catch (error) {
+          console.error("Error al enviar:", error);
+          alert("Ocurrió un error al enviar los datos.");
+        }
       });
 
       closeModalBtn.addEventListener("click", () => {
