@@ -219,36 +219,28 @@
         });
 
         try {
-          const respuesta = await fetch("https://script.google.com/macros/s/AKfycbxA-fCnWE81eRUI8OCeRwzOOMck9Bxax7WAAa4MZQXHa0lNfJh3fq0sarfSQPMYOdeY/exec", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded"
-            },
-            body: datos.toString()
-          });
-
-          const resultado = await respuesta.json();
-          console.log("Respuesta del servidor:", resultado);
-
-          if (resultado.success) {
-            form.reset();
-            modal.style.display = "flex";
-          } else {
-            throw new Error(resultado.message || "Error desconocido del servidor");
-          }
-        } catch (error) {
-          console.error("Error al enviar:", error);
-          alert("Ocurrió un error al enviar los datos.");
-        }
-      });
+          fetch("https://script.google.com/macros/s/AKfycbzKwLLVXmoI9rnu0-v40OKTkUht0uxv2eBl1NSDNmA41mvuSHMz7qeb6UgXnoWACRdo/exec", {
+  method: "POST",
+  mode: "no-cors",
+  headers: {
+    "Content-Type": "application/x-www-form-urlencoded"
+  },
+  body: datos.toString()
+})
+.then(() => {
+  // Asumiendo éxito, porque no podemos leer la respuesta en modo no-cors
+  form.reset();
+  modal.style.display = "flex";
+})
+.catch((error) => {
+  console.error("Error al enviar:", error);
+  alert("Ocurrió un error al enviar los datos.");
+});
 
       closeModalBtn.addEventListener("click", () => {
         modal.style.display = "none";
         form.nombre.focus();
       });
-    });
   </script>
 </body>
 </html>
-
- 
