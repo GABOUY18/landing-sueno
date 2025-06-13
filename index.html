@@ -170,7 +170,7 @@
     <p>Registrate para recibir consejos naturales, apoyo personalizado y enterarte antes que nadie del lanzamiento de nuestra app.</p>
     <form id="registro-form">
       <input type="text" name="nombre" placeholder="Nombre completo" required />
-      <input type="email" name="email" placeholder="Correo electrónico" required />
+      <input type="email" name="correo" placeholder="Correo electrónico" required />
       <input list="paises" name="pais" placeholder="País de residencia" required />
       <datalist id="paises">
         <option value="Argentina">
@@ -211,29 +211,26 @@
         return;
       }
 
-      const datos = {
-        nombre,
-        correo,
-        pais,
-        edad
-      };
+      const formData = new FormData();
+      formData.append("nombre", nombre);
+      formData.append("correo", correo);
+      formData.append("pais", pais);
+      formData.append("edad", edad);
 
       try {
-        const respuesta = await fetch("https://script.google.com/macros/s/AKfycbwUEZaoSfNLvM5jCnUrmq0ABf9Ml3sV8Kw3gNVssFPpKyaoMVtrLVzhjTgms47wZeKR/exec", {
+        const response = await fetch("https://script.google.com/macros/s/AKfycbyE7k8o0Rl4Tb_i5nJ_V3Suf8cjo9-i9Uw6HPoyTGEmp033Tdh2gd_BkzndBxygKVQp/exec", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(datos)
+          body: formData
         });
 
-        const resultado = await respuesta.json();
+        const resultText = await response.text();
+        console.log("Respuesta cruda del servidor:", resultText);
 
-        if (resultado.success) {
+        if (response.ok) {
           form.reset();
           modal.style.display = "flex";
         } else {
-          alert("Error: " + resultado.message);
+          alert("Ocurrió un error al enviar los datos.");
         }
 
       } catch (error) {
