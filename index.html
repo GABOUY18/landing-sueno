@@ -101,6 +101,26 @@
     button:hover {
       background-color: #00796b;
     }
+    #mensaje {
+      display: none;
+      color: #00897b;
+      font-weight: bold;
+      margin-top: 1.5rem;
+    }
+    #cerrarBtn {
+      margin-top: 10px;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      border: none;
+      background-color: #00897b;
+      color: white;
+      border-radius: 10px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+    #cerrarBtn:hover {
+      background-color: #00796b;
+    }
     @media(min-width: 768px) {
       .features {
         grid-template-columns: repeat(2, 1fr);
@@ -136,7 +156,7 @@
   <section class="cta">
     <h2>¿Te cuesta dormir bien?</h2>
     <p>Registrate para recibir consejos naturales, apoyo personalizado y enterarte antes que nadie del lanzamiento de nuestra app.</p>
-    <form action="https://script.google.com/macros/s/AKfycbxvkvNMg0hxMEeCzeKK970RSrr-XFAH1qY8ggfbUoJMQKaS5utCYfsMFRYXN6KYj8NO/exec" method="POST">
+    <form id="formulario" action="https://script.google.com/macros/s/AKfycbwLsXSS8x5Oz-5ajMt83X7b3SIETvlPN5ZTeeTh-ikUBtZyBTfQah1hDDBO531qIdjj/exec" method="POST">
       <input type="text" name="nombre" placeholder="Nombre completo" required />
       <input type="email" name="correo" placeholder="Correo electrónico" required />
       <input list="paises" name="pais" placeholder="País de residencia" required />
@@ -150,6 +170,42 @@
       <input type="number" name="edad" placeholder="Edad" required min="1" max="120" />
       <button type="submit">Quiero mejorar mi sueño</button>
     </form>
+
+    <div id="mensaje">
+      Gracias por registrarte! Pronto recibirás novedades para mejorar tu descanso.
+      <br/>
+      <button id="cerrarBtn">Aceptar</button>
+    </div>
   </section>
+
+  <script>
+    const form = document.getElementById('formulario');
+    const mensaje = document.getElementById('mensaje');
+    const cerrarBtn = document.getElementById('cerrarBtn');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+
+      fetch(form.action, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: formData
+      })
+      .catch(() => {
+        // ignorar errores para mostrar mensaje igual
+      });
+
+      form.style.display = 'none';
+      mensaje.style.display = 'block';
+    });
+
+    cerrarBtn.addEventListener('click', function() {
+      mensaje.style.display = 'none';
+      form.reset();
+      form.style.display = 'flex';
+    });
+  </script>
 </body>
 </html>
