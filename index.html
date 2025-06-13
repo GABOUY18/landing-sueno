@@ -1,292 +1,195 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <!-- Viewport optimizado para móviles -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
-  <title>Duerme Mejor | Tu espacio para descansar</title>
-  <link rel="icon" href="data:," />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mejorá tu Sueño</title>
   <style>
-    /* Reset básico */
-    *, ::before, ::after {
-      box-sizing: border-box;
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #f0f4f8;
       margin: 0;
       padding: 0;
-    }
-
-    /* Clases accesibles */
-    .sr-only {
-      position: absolute;
-      width: 1px; height: 1px;
-      padding: 0; margin: -1px;
-      overflow: hidden;
-      clip: rect(0,0,0,0);
-      border: 0;
-    }
-
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      color: #2e3c4f;
-      background: linear-gradient(135deg, #e0f7fa, #c8e6c9);
       display: flex;
-      flex-direction: column;
+      justify-content: center;
       align-items: center;
-      padding: 0 1rem;
+      min-height: 100vh;
     }
 
-    header {
-      text-align: center;
-      padding: 3rem 1rem 2rem;
-    }
-    header h1 {
-      font-size: 2.5rem;
-      color: #1a202c;
-      margin-bottom: 0.5rem;
-    }
-    header p {
-      font-size: 1.1rem;
-      max-width: 640px;
-      margin: 0 auto;
-      color: #4a5568;
-    }
-
-    .features {
-      display: grid;
-      gap: 1.5rem;
-      padding: 2rem 0;
-      width: 100%;
-      max-width: 900px;
-      grid-template-columns: 1fr;
-    }
-    @media(min-width: 768px){
-      .features { grid-template-columns: repeat(2,1fr); }
-    }
-    .feature {
+    .container {
       background: #fff;
-      border-radius: 12px;
-      padding: 1.5rem;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease;
-    }
-    .feature:hover {
-      transform: translateY(-5px);
-    }
-    .feature h2 {
-      font-size: 1.3rem;
-      margin-bottom: 0.5rem;
-    }
-    .feature p {
-      font-size: 0.95rem;
-      color: #5a6779;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+      position: relative;
     }
 
-    .cta {
-      background: #fff;
-      border-radius: 12px;
-      padding: 2rem;
-      margin: 2rem 0;
-      width: 100%;
-      max-width: 700px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .cta h2 {
-      font-size: 1.8rem;
-      margin-bottom: 0.5rem;
-      color: #1a202c;
-    }
-    .cta p {
-      font-size: 1.05rem;
-      color: #4a5568;
-      margin-bottom: 1.5rem;
+    h1 {
       text-align: center;
+      margin-bottom: 20px;
+      color: #1a202c;
     }
 
     form {
       display: flex;
       flex-direction: column;
-      gap: 1rem;
-      width: 100%;
     }
-    input, button, select {
-      width: 100%;
-      padding: 0.9rem;
-      font-size: 1rem;
+
+    input, select, button {
+      padding: 12px;
+      margin-bottom: 15px;
       border-radius: 8px;
-      border: 1px solid #cbd5e1;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      outline: none;
+      transition: border 0.3s;
     }
+
     input:focus, select:focus {
-      outline: 2px solid #00897b;
+      border-color: #3182ce;
     }
-    input:invalid {
-      border-color: #e57373;
-    }
+
     input:valid {
-      border-color: #4caf50;
+      border-color: #38a169;
+    }
+
+    input:invalid {
+      border-color: #e53e3e;
     }
 
     button {
-      background: #00897b;
-      color: #fff;
-      border: none;
+      background-color: #4FD1C5;
+      color: white;
       font-weight: bold;
       cursor: pointer;
-      transition: background 0.3s ease;
-    }
-    button:hover:not(:disabled) {
-      background: #00796b;
-    }
-    button:disabled {
-      background: #81c784;
-      cursor: not-allowed;
+      transition: background 0.3s;
+      border: none;
     }
 
-    /* Modal confirmación */
-    #confirmModal {
-      display: none;
+    button:hover {
+      background-color: #38B2AC;
+    }
+
+    .overlay {
       position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.5);
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.6);
+      display: flex;
       justify-content: center;
       align-items: center;
-      z-index: 100;
+      z-index: 999;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease;
     }
-    #confirmModal .modal-content {
+
+    .overlay.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .overlay-message {
       background: white;
-      padding: 2rem;
-      border-radius: 12px;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
       text-align: center;
-      max-width: 350px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-      animation: pop 0.3s ease-out;
+      max-width: 90%;
     }
-    #confirmModal h3 {
-      color: #00897b;
-      margin-bottom: 0.5rem;
+
+    .overlay-message h2 {
+      color: #2D3748;
+      font-size: 20px;
     }
-    #confirmModal button {
-      margin-top: 1rem;
-    }
-    @keyframes pop {
-      from { opacity: 0; transform: scale(0.5); }
-      to { opacity:1; transform: scale(1); }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 20px;
+      }
+
+      input, select, button {
+        font-size: 14px;
+      }
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>¿Problemas para dormir?</h1>
-    <p>Una forma cálida, accesible y profesional de ayudarte a dormir mejor. Tu descanso comienza aquí.</p>
-  </header>
 
-  <section class="features">
-    <div class="feature">
-      <h2>🌙 Rutinas guiadas</h2>
-      <p>Ejercicios paso a paso para desconectarte y relajar tu mente.</p>
-    </div>
-    <div class="feature">
-      <h2>🧠 Espacio de acompañamiento</h2>
-      <p>Recibí herramientas y apoyo para el camino hacia mejor descanso.</p>
-    </div>
-    <div class="feature">
-      <h2>⏰ Recordatorios inteligentes</h2>
-      <p>Creá hábitos saludables con alertas que se adaptan a vos.</p>
-    </div>
-    <div class="feature">
-      <h2>🔒 Acceso temprano</h2>
-      <p>Registrate gratis y sé de los primeros en probar la app.</p>
-    </div>
-  </section>
-
-  <section class="cta">
-    <h2>¿Querés mejorar tu sueño?</h2>
-    <p>Completá el formulario y accedé a tips, acompañamiento y acceso exclusivo.</p>
-    <form id="registro-form" novalidate>
-      <label class="sr-only" for="nombre">Nombre completo</label>
-      <input type="text" id="nombre" name="nombre" placeholder="Nombre completo" required />
-
-      <label class="sr-only" for="email">Correo electrónico</label>
-      <input type="email" id="email" name="email" placeholder="Correo electrónico" required />
-
-      <label class="sr-only" for="pais">País de residencia</label>
-      <input list="paises" id="pais" name="pais" placeholder="País de residencia" required />
-      <datalist id="paises">
-        <option value="Argentina"><option value="Uruguay"><option value="México">
-        <option value="España"><option value="Colombia">
-      </datalist>
-
-      <label class="sr-only" for="edad">Edad</label>
-      <input type="number" id="edad" name="edad" placeholder="Edad" required min="1" max="120" />
-
+  <div class="container">
+    <h1>Mejorá tu Sueño</h1>
+    <form id="sleepForm">
+      <input type="text" name="nombre" placeholder="Tu nombre" required />
+      <input type="number" name="edad" placeholder="Tu edad" required min="1" max="120" />
+      <input type="email" name="email" placeholder="Tu email" required />
+      <select name="pais" required>
+        <option value="" disabled selected>Seleccioná tu país</option>
+        <option value="Argentina">Argentina</option>
+        <option value="Uruguay">Uruguay</option>
+        <option value="Chile">Chile</option>
+        <option value="México">México</option>
+        <option value="España">España</option>
+        <option value="Otro">Otro</option>
+      </select>
       <button type="submit">Quiero mejorar mi sueño</button>
     </form>
-  </section>
+  </div>
 
-  <div id="confirmModal">
-    <div class="modal-content">
-      <h3>¡Gracias por registrarte!</h3>
-      <p>🔒 Te avisaremos por correo cuando la app esté lista.</p>
-      <button id="closeModalBtn">Cerrar</button>
+  <div class="overlay" id="overlay">
+    <div class="overlay-message">
+      <h2>¡Gracias por registrarte!<br>Pronto recibirás novedades para mejorar tu sueño.</h2>
     </div>
   </div>
 
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const form = document.getElementById("registro-form");
-      const submitBtn = form.querySelector("button");
-      const modal = document.getElementById("confirmModal");
-      const closeModalBtn = document.getElementById("closeModalBtn");
+  const form = document.getElementById('sleepForm');
+  const overlay = document.getElementById('overlay');
 
-      const scriptURL = "https://script.google.com/macros/s/AKfycbwKMTxFir64QBBmHzyw_kJXdcD5tBaT8YDxKp0n33a07uTOV73-dfaEcXpagQYt7skW/exec";
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
 
-      form.querySelectorAll("input").forEach(input => {
-        input.addEventListener("input", () => {
-          input.style.borderColor = input.checkValidity() ? "#4caf50" : "#e57373";
-        });
-      });
+    if (form.checkValidity()) {
+      const data = {
+        nombre: form.nombre.value,
+        edad: form.edad.value,
+        email: form.email.value,
+        pais: form.pais.value
+      };
 
-      form.addEventListener("submit", async (e) => {
-        e.preventDefault();
+      // URL de tu Apps Script (REEMPLAZAR con la tuya)
+      const scriptURL = 'https://script.google.com/macros/s/AKfycbzx6x664cmgG3TDPIRSb4KIFRKzsHNlnSmFNIC-_VMHbWQzQ87I1eslEAxf8nHctKKL/exec';
 
-        if (!form.checkValidity()) {
-          form.reportValidity();
-          return;
+      fetch(scriptURL, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json'
         }
-
-        submitBtn.disabled = true;
-        submitBtn.textContent = "Enviando...";
-
-        const data = new URLSearchParams(new FormData(form));
-
-        try {
-          const res = await fetch(scriptURL, {
-            method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: data
-          });
-          const json = await res.json();
-          if (json.success) {
-            form.reset();
-            modal.style.display = "flex";
-          } else {
-            alert(json.message || "Error inesperado.");
-          }
-        } catch (err) {
-          console.error("Fetch error:", err);
-          alert("Hubo un problema de red. Podés intentarlo más tarde.");
-        } finally {
-          submitBtn.disabled = false;
-          submitBtn.textContent = "Quiero mejorar mi sueño";
+      })
+      .then(response => {
+        if (response.ok) {
+          overlay.classList.add('show');
+          form.reset();
+          setTimeout(() => {
+            overlay.classList.remove('show');
+          }, 4000);
+        } else {
+          alert('Hubo un error al enviar el formulario.');
         }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('Error al conectar con el servidor.');
       });
+    } else {
+      form.reportValidity();
+    }
+  });
+</script>
 
-      closeModalBtn.addEventListener("click", () => {
-        modal.style.display = "none";
-        form.nombre.focus();
-      });
-    });
-  </script>
 </body>
 </html>
