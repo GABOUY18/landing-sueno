@@ -145,7 +145,7 @@
     </div>
   </div>
 
-  <script>
+ <script>
   const form = document.getElementById('sleepForm');
   const overlay = document.getElementById('overlay');
 
@@ -153,22 +153,14 @@
     e.preventDefault();
 
     if (form.checkValidity()) {
-      const data = {
-        nombre: form.nombre.value,
-        edad: form.edad.value,
-        email: form.email.value,
-        pais: form.pais.value
-      };
+      const formData = new FormData(form);
 
-      // URL de tu Apps Script (REEMPLAZAR con la tuya)
-      const scriptURL = 'https://script.google.com/macros/s/AKfycbzx6x664cmgG3TDPIRSb4KIFRKzsHNlnSmFNIC-_VMHbWQzQ87I1eslEAxf8nHctKKL/exec';
+      // URL de tu Apps Script
+      const scriptURL = 'https://script.google.com/macros/s/AKfycbzcT3MiMau28__c2JeWLBLAEvRwg2bcD2ObzjvBICDdMSGCPJzfZWOzvCxrfnAnYJMu/exec'; // ← Reemplazá con tu URL real
 
       fetch(scriptURL, {
         method: 'POST',
-        body: JSON.stringify(data),
-        headers: {
-          'Content-Type': 'application/json'
-        }
+        body: formData
       })
       .then(response => {
         if (response.ok) {
