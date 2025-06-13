@@ -192,55 +192,64 @@
     </div>
   </div>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const form = document.getElementById("registro-form");
-      const modal = document.getElementById("confirmModal");
-      const closeModalBtn = document.getElementById("closeModalBtn");
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("registro-form");
+    const modal = document.getElementById("confirmModal");
+    const closeModalBtn = document.getElementById("closeModalBtn");
 
-      form.addEventListener("submit", async function (e) {
-        e.preventDefault();
+    form.addEventListener("submit", async function (e) {
+      e.preventDefault();
 
-        const nombre = form.nombre.value.trim();
-        const email = form.email.value.trim();
-        const pais = form.pais.value.trim();
-        const edad = form.edad.value.trim();
+      const nombre = form.nombre.value.trim();
+      const correo = form.email.value.trim();
+      const pais = form.pais.value.trim();
+      const edad = form.edad.value.trim();
 
-        if (!nombre || !email || !pais || !edad) {
-          alert("Por favor, completá todos los campos.");
-          return;
-        }
+      if (!nombre || !correo || !pais || !edad) {
+        alert("Por favor, completá todos los campos.");
+        return;
+      }
 
-        const datos = new URLSearchParams({
-          nombre,
-          correo: email,  // coincidir con Apps Script
-          pais,
-          edad
+      const datos = {
+        nombre,
+        correo,
+        pais,
+        edad
+      };
+
+      try {
+        const respuesta = await fetch("https://script.google.com/macros/s/AKfycbwUEZaoSfNLvM5jCnUrmq0ABf9Ml3sV8Kw3gNVssFPpKyaoMVtrLVzhjTgms47wZeKR/exec", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(datos)
         });
 
-        try {
-          fetch("https://script.google.com/macros/s/AKfycbzKwLLVXmoI9rnu0-v40OKTkUht0uxv2eBl1NSDNmA41mvuSHMz7qeb6UgXnoWACRdo/exec", {
-  method: "POST",
-  mode: "no-cors",
-  headers: {
-    "Content-Type": "application/x-www-form-urlencoded"
-  },
-  body: datos.toString()
-})
-.then(() => {
-  // Asumiendo éxito, porque no podemos leer la respuesta en modo no-cors
-  form.reset();
-  modal.style.display = "flex";
-})
-.catch((error) => {
-  console.error("Error al enviar:", error);
-  alert("Ocurrió un error al enviar los datos.");
-});
+        const resultado = await respuesta.json();
 
-      closeModalBtn.addEventListener("click", () => {
-        modal.style.display = "none";
-        form.nombre.focus();
-      });
-  </script>
+        if (resultado.success) {
+          form.reset();
+          modal.style.display = "flex";
+        } else {
+          alert("Error: " + resultado.message);
+        }
+
+      } catch (error) {
+        console.error("Error al enviar:", error);
+        alert("Ocurrió un error al enviar los datos.");
+      }
+    });
+
+    closeModalBtn.addEventListener("click", () => {
+      modal.style.display = "none";
+      form.nombre.focus();
+    });
+  });
+</script>
+
+
+
 </body>
 </html>
