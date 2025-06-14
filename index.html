@@ -90,6 +90,15 @@
     input {
       background: #f8fafc;
       color: #2e3c4f;
+      transition: background-color 0.3s, border-color 0.3s;
+    }
+    input.valid {
+      background-color: #e8f5e9;
+      border-color: #4caf50;
+    }
+    input.invalid {
+      background-color: #ffebee;
+      border-color: #f44336;
     }
     button {
       background-color: #00897b;
@@ -156,7 +165,7 @@
   <section class="cta">
     <h2>¿Te cuesta dormir bien?</h2>
     <p>Registrate para recibir consejos naturales, apoyo personalizado y enterarte antes que nadie del lanzamiento de nuestra app.</p>
-    <form id="formulario" action="https://script.google.com/macros/s/AKfycbwLsXSS8x5Oz-5ajMt83X7b3SIETvlPN5ZTeeTh-ikUBtZyBTfQah1hDDBO531qIdjj/exec" method="POST">
+    <form id="formulario" action="https://script.google.com/macros/s/AKfycbzqbrySaGrIp9KDH4dQWT5v43jcZitoYG-4-ZzM4rzHEGcv2Bu3SHA02myUVTZXNA/exec" method="POST" novalidate>
       <input type="text" name="nombre" placeholder="Nombre completo" required />
       <input type="email" name="correo" placeholder="Correo electrónico" required />
       <input list="paises" name="pais" placeholder="País de residencia" required />
@@ -183,28 +192,48 @@
     const mensaje = document.getElementById('mensaje');
     const cerrarBtn = document.getElementById('cerrarBtn');
 
+    function validarCampos() {
+      let valido = true;
+      Array.from(form.elements).forEach(el => {
+        if (el.tagName === "INPUT") {
+          if (!el.checkValidity()) {
+            el.classList.add("invalid");
+            el.classList.remove("valid");
+            valido = false;
+          } else {
+            el.classList.remove("invalid");
+            el.classList.add("valid");
+          }
+        }
+      });
+      return valido;
+    }
+
     form.addEventListener('submit', function(e) {
       e.preventDefault();
-
-      const formData = new FormData(form);
-
-      fetch(form.action, {
-        method: 'POST',
-        mode: 'no-cors',
-        body: formData
-      })
-      .catch(() => {
-        // ignorar errores para mostrar mensaje igual
-      });
-
-      form.style.display = 'none';
-      mensaje.style.display = 'block';
+      if (validarCampos()) {
+        const formData = new FormData(form);
+        fetch(form.action, {
+          method: 'POST',
+          mode: 'no-cors',
+          body: formData
+        }).catch(() => {});
+        form.style.display = 'none';
+        mensaje.style.display = 'block';
+      } else {
+        form.reportValidity();
+      }
     });
 
     cerrarBtn.addEventListener('click', function() {
       mensaje.style.display = 'none';
       form.reset();
       form.style.display = 'flex';
+      Array.from(form.elements).forEach(el => {
+        if (el.tagName === "INPUT") {
+          el.classList.remove("valid", "invalid");
+        }
+      });
     });
   </script>
 </body>
