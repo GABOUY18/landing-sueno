@@ -14,20 +14,18 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 0;
     }
     header {
       text-align: center;
       padding: 3rem 1rem 2rem;
     }
     header h1 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
+      font-size: 2.5rem;
       color: #1a202c;
     }
     header p {
       font-size: 1.2rem;
-      max-width: 640px;
+      max-width: 600px;
       margin: 0 auto;
       color: #4a5568;
     }
@@ -49,7 +47,7 @@
       transform: translateY(-5px);
     }
     .feature h2 {
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       color: #1a202c;
       margin-bottom: 0.5rem;
     }
@@ -93,12 +91,12 @@
       transition: background-color 0.3s, border-color 0.3s;
     }
     input.valid {
-      background-color: #e8f5e9 !important;
-      border-color: #4caf50 !important;
+      background-color: #e8f5e9;
+      border-color: #4caf50;
     }
     input.invalid {
-      background-color: #ffebee !important;
-      border-color: #f44336 !important;
+      background-color: #ffebee;
+      border-color: #f44336;
     }
     button {
       background-color: #00897b;
@@ -110,26 +108,78 @@
     button:hover {
       background-color: #00796b;
     }
+
+    /* Mensaje emergente animado */
     #mensaje {
-      display: none;
-      color: #00897b;
-      font-weight: bold;
-      margin-top: 1.5rem;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      visibility: hidden;
+      opacity: 0;
+      transition: visibility 0s linear 0.3s, opacity 0.3s ease;
+      z-index: 9999;
     }
+
+    #mensaje.visible {
+      visibility: visible;
+      opacity: 1;
+      transition-delay: 0s;
+    }
+
+    #mensaje .contenido {
+      background-color: #ffffff;
+      padding: 2rem;
+      border-radius: 20px;
+      text-align: center;
+      max-width: 400px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+      animation: slideFade 0.4s ease-out;
+    }
+
+    #mensaje h3 {
+      margin-top: 0;
+      font-size: 1.8rem;
+      color: #00796b;
+    }
+
+    #mensaje p {
+      font-size: 1.1rem;
+      margin: 1rem 0;
+      color: #333;
+    }
+
     #cerrarBtn {
       margin-top: 10px;
-      padding: 0.5rem 1rem;
-      cursor: pointer;
-      border: none;
+      padding: 0.6rem 1.2rem;
       background-color: #00897b;
       color: white;
+      border: none;
       border-radius: 10px;
       font-weight: bold;
+      cursor: pointer;
       transition: background-color 0.3s ease;
     }
+
     #cerrarBtn:hover {
-      background-color: #00796b;
+      background-color: #00695c;
     }
+
+    @keyframes slideFade {
+      from {
+        transform: translateY(-20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
     @media(min-width: 768px) {
       .features {
         grid-template-columns: repeat(2, 1fr);
@@ -165,7 +215,7 @@
   <section class="cta">
     <h2>¿Te cuesta dormir bien?</h2>
     <p>Registrate para recibir consejos naturales, apoyo personalizado y enterarte antes que nadie del lanzamiento de nuestra app.</p>
-    <form id="formulario" action="https://script.google.com/macros/s/AKfycbx1wqiPqNpI9M1TV7KXh4juki9We6HVYG9r7lWY3dkJF7-Jl10G8iWK9jiJwA8QNOFI/exec" method="POST" novalidate>
+    <form id="formulario" action="https://script.google.com/macros/s/AKfycbzVshgD0Gaod1toBaml7nZRmM3DQwdztCHuy26QFp1n_8Ub40YpnyAFLlGQcxZHIKhk/exec" method="POST" novalidate>
       <input type="text" name="nombre" placeholder="Nombre completo" required />
       <input type="email" name="correo" placeholder="Correo electrónico" required />
       <input list="paises" name="pais" placeholder="País de residencia" required />
@@ -367,15 +417,16 @@
       <input type="number" name="edad" placeholder="Edad" required min="1" max="120" />
       <button type="submit">Quiero mejorar mi sueño</button>
     </form>
+  </section>
 
-    <div id="mensaje">
-      ¡Gracias por registrarte! 
-
-      Pronto recibirás novedades para mejorar tu descanso.
-      <br/>
+  <!-- Overlay mensaje de confirmación -->
+  <div id="mensaje">
+    <div class="contenido">
+      <h3>¡GRACIAS POR REGISTRARTE!</h3>
+      <p>Pronto recibirás novedades para mejorar tu descanso.</p>
       <button id="cerrarBtn">Aceptar</button>
     </div>
-  </section>
+  </div>
 
   <script>
     const form = document.getElementById('formulario');
@@ -399,21 +450,6 @@
       return valido;
     }
 
-    // Validación dinámica mientras se escribe
-    Array.from(form.elements).forEach(el => {
-      if (el.tagName === "INPUT") {
-        el.addEventListener('input', () => {
-          if (!el.checkValidity()) {
-            el.classList.add("invalid");
-            el.classList.remove("valid");
-          } else {
-            el.classList.remove("invalid");
-            el.classList.add("valid");
-          }
-        });
-      }
-    });
-
     form.addEventListener('submit', function(e) {
       e.preventDefault();
       if (validarCampos()) {
@@ -423,17 +459,15 @@
           mode: 'no-cors',
           body: formData
         }).catch(() => {});
-        form.style.display = 'none';
-        mensaje.style.display = 'block';
+        mensaje.classList.add('visible');
       } else {
         form.reportValidity();
       }
     });
 
     cerrarBtn.addEventListener('click', function() {
-      mensaje.style.display = 'none';
+      mensaje.classList.remove('visible');
       form.reset();
-      form.style.display = 'flex';
       Array.from(form.elements).forEach(el => {
         if (el.tagName === "INPUT") {
           el.classList.remove("valid", "invalid");
@@ -443,4 +477,5 @@
   </script>
 </body>
 </html>
+
 
