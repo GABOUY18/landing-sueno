@@ -429,52 +429,69 @@
   </div>
 
   <script>
-    const form = document.getElementById('formulario');
-    const mensaje = document.getElementById('mensaje');
-    const cerrarBtn = document.getElementById('cerrarBtn');
+  const form = document.getElementById('formulario');
+  const mensaje = document.getElementById('mensaje');
+  const cerrarBtn = document.getElementById('cerrarBtn');
 
-    function validarCampos() {
-      let valido = true;
-      Array.from(form.elements).forEach(el => {
-        if (el.tagName === "INPUT") {
-          if (!el.checkValidity()) {
-            el.classList.add("invalid");
-            el.classList.remove("valid");
-            valido = false;
-          } else {
-            el.classList.remove("invalid");
-            el.classList.add("valid");
-          }
+  // Función que valida todos los campos y aplica clases valid/invalid
+  function validarCampos() {
+    let valido = true;
+    Array.from(form.elements).forEach(el => {
+      if (el.tagName === "INPUT") {
+        if (!el.checkValidity()) {
+          el.classList.add("invalid");
+          el.classList.remove("valid");
+          valido = false;
+        } else {
+          el.classList.remove("invalid");
+          el.classList.add("valid");
         }
-      });
-      return valido;
-    }
-
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      if (validarCampos()) {
-        const formData = new FormData(form);
-        fetch(form.action, {
-          method: 'POST',
-          mode: 'no-cors',
-          body: formData
-        }).catch(() => {});
-        mensaje.classList.add('visible');
-      } else {
-        form.reportValidity();
       }
     });
+    return valido;
+  }
 
-    cerrarBtn.addEventListener('click', function() {
-      mensaje.classList.remove('visible');
-      form.reset();
-      Array.from(form.elements).forEach(el => {
-        if (el.tagName === "INPUT") {
-          el.classList.remove("valid", "invalid");
+  // Validación en tiempo real al cambiar cualquier input
+  Array.from(form.elements).forEach(el => {
+    if (el.tagName === "INPUT") {
+      el.addEventListener('input', () => {
+        if (!el.checkValidity()) {
+          el.classList.add("invalid");
+          el.classList.remove("valid");
+        } else {
+          el.classList.remove("invalid");
+          el.classList.add("valid");
         }
       });
+    }
+  });
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    if (validarCampos()) {
+      const formData = new FormData(form);
+      fetch(form.action, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: formData
+      }).catch(() => {});
+      mensaje.classList.add('visible');
+    } else {
+      form.reportValidity();
+    }
+  });
+
+  cerrarBtn.addEventListener('click', function() {
+    mensaje.classList.remove('visible');
+    form.reset();
+    Array.from(form.elements).forEach(el => {
+      if (el.tagName === "INPUT") {
+        el.classList.remove("valid", "invalid");
+      }
     });
-  </script>
+  });
+</script>
+
 </body>
 </html>
 
