@@ -93,12 +93,12 @@
       transition: background-color 0.3s, border-color 0.3s;
     }
     input.valid {
-      background-color: #e8f5e9;
-      border-color: #4caf50;
+      background-color: #e8f5e9 !important;
+      border-color: #4caf50 !important;
     }
     input.invalid {
-      background-color: #ffebee;
-      border-color: #f44336;
+      background-color: #ffebee !important;
+      border-color: #f44336 !important;
     }
     button {
       background-color: #00897b;
@@ -165,7 +165,7 @@
   <section class="cta">
     <h2>¿Te cuesta dormir bien?</h2>
     <p>Registrate para recibir consejos naturales, apoyo personalizado y enterarte antes que nadie del lanzamiento de nuestra app.</p>
-    <form id="formulario" action="https://script.google.com/macros/s/AKfycbzgEG5iHMhACn7XSWuhXvKtXsPkrMjTzIKD7Dcmw6EcsujyK-FG9T_E1iCSqFVVZr2D/exec" method="POST" novalidate>
+    <form id="formulario" action="https://script.google.com/macros/s/AKfycbx1wqiPqNpI9M1TV7KXh4juki9We6HVYG9r7lWY3dkJF7-Jl10G8iWK9jiJwA8QNOFI/exec" method="POST" novalidate>
       <input type="text" name="nombre" placeholder="Nombre completo" required />
       <input type="email" name="correo" placeholder="Correo electrónico" required />
       <input list="paises" name="pais" placeholder="País de residencia" required />
@@ -209,10 +209,18 @@
       return valido;
     }
 
-    // Validación en tiempo real
+    // Validación dinámica mientras se escribe
     Array.from(form.elements).forEach(el => {
       if (el.tagName === "INPUT") {
-        el.addEventListener('input', validarCampos);
+        el.addEventListener('input', () => {
+          if (!el.checkValidity()) {
+            el.classList.add("invalid");
+            el.classList.remove("valid");
+          } else {
+            el.classList.remove("invalid");
+            el.classList.add("valid");
+          }
+        });
       }
     });
 
@@ -245,3 +253,4 @@
   </script>
 </body>
 </html>
+
