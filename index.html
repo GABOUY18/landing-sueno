@@ -114,6 +114,67 @@
       background-color: #00796b;
     }
 
+    /* Selector emojis */
+  .emoji-selector {
+  background: white;
+  border-radius: 12px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 2rem; /* separación entre emojis */
+  user-select: none;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+  margin-top: 0.5rem;
+}
+
+.emoji-selector button {
+  font-size: 3rem; /* tamaño grande del emoji */
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+  cursor: pointer;
+  position: relative;
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.emoji-selector button:hover {
+  transform: scale(1.1);
+}
+
+.emoji-selector button.selected::after {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  width: calc(100% + 8px);
+  height: calc(100% + 8px);
+  border-radius: 50%;
+  border: 3px solid #00897b;
+  box-sizing: border-box;
+}
+
+
+
+
+    
+    .emoji-error {
+      color: #f44336;
+      font-size: 0.9rem;
+      text-align: center;
+      margin-top: -0.5rem;
+      margin-bottom: 0.5rem;
+      display: none;
+    }
+
     /* Mensaje emergente animado */
     #mensaje {
       position: fixed;
@@ -220,206 +281,32 @@
   <section class="cta">
     <h2>¿Te cuesta dormir bien?</h2>
     <p>Registrate para recibir consejos naturales, apoyo personalizado y enterarte antes que nadie del lanzamiento de nuestra app.</p>
-    <form id="formulario" action="https://script.google.com/macros/s/AKfycbzVshgD0Gaod1toBaml7nZRmM3DQwdztCHuy26QFp1n_8Ub40YpnyAFLlGQcxZHIKhk/exec" method="POST" novalidate>
+    <form id="formulario" action="https://script.google.com/macros/s/AKfycbyd0AT6d_ZHrlpVaE6gzEZvRVN-iKlycrDq3YIhBIUwrtM_SssJbLMF8IHR3ddk0j-F/exec" method="POST" novalidate>
       <input type="text" name="nombre" placeholder="Nombre completo" required />
       <input type="email" name="correo" placeholder="Correo electrónico" required />
       <input list="paises" name="pais" placeholder="País de residencia" required />
       <datalist id="paises">
         <option value="Afganistán">
-  <option value="Albania">
-  <option value="Alemania">
-  <option value="Andorra">
-  <option value="Angola">
-  <option value="Antigua y Barbuda">
-  <option value="Arabia Saudita">
-  <option value="Argelia">
-  <option value="Argentina">
-  <option value="Armenia">
-  <option value="Australia">
-  <option value="Austria">
-  <option value="Azerbaiyán">
-  <option value="Bahamas">
-  <option value="Bangladés">
-  <option value="Barbados">
-  <option value="Baréin">
-  <option value="Bélgica">
-  <option value="Belice">
-  <option value="Benín">
-  <option value="Bielorrusia">
-  <option value="Birmania">
-  <option value="Bolivia">
-  <option value="Bosnia y Herzegovina">
-  <option value="Botsuana">
-  <option value="Brasil">
-  <option value="Brunéi">
-  <option value="Bulgaria">
-  <option value="Burkina Faso">
-  <option value="Burundi">
-  <option value="Bután">
-  <option value="Cabo Verde">
-  <option value="Camboya">
-  <option value="Camerún">
-  <option value="Canadá">
-  <option value="Catar">
-  <option value="Chad">
-  <option value="Chile">
-  <option value="China">
-  <option value="Chipre">
-  <option value="Colombia">
-  <option value="Comoras">
-  <option value="Corea del Norte">
-  <option value="Corea del Sur">
-  <option value="Costa de Marfil">
-  <option value="Costa Rica">
-  <option value="Croacia">
-  <option value="Cuba">
-  <option value="Dinamarca">
-  <option value="Dominica">
-  <option value="Ecuador">
-  <option value="Egipto">
-  <option value="El Salvador">
-  <option value="Emiratos Árabes Unidos">
-  <option value="Eritrea">
-  <option value="Eslovaquia">
-  <option value="Eslovenia">
-  <option value="España">
-  <option value="Estados Unidos">
-  <option value="Estonia">
-  <option value="Esuatini">
-  <option value="Etiopía">
-  <option value="Filipinas">
-  <option value="Finlandia">
-  <option value="Fiyi">
-  <option value="Francia">
-  <option value="Gabón">
-  <option value="Gambia">
-  <option value="Georgia">
-  <option value="Ghana">
-  <option value="Granada">
-  <option value="Grecia">
-  <option value="Guatemala">
-  <option value="Guinea">
-  <option value="Guinea-Bisáu">
-  <option value="Guinea Ecuatorial">
-  <option value="Guyana">
-  <option value="Haití">
-  <option value="Honduras">
-  <option value="Hungría">
-  <option value="India">
-  <option value="Indonesia">
-  <option value="Irak">
-  <option value="Irán">
-  <option value="Irlanda">
-  <option value="Islandia">
-  <option value="Islas Marshall">
-  <option value="Islas Salomón">
-  <option value="Israel">
-  <option value="Italia">
-  <option value="Jamaica">
-  <option value="Japón">
-  <option value="Jordania">
-  <option value="Kazajistán">
-  <option value="Kenia">
-  <option value="Kirguistán">
-  <option value="Kiribati">
-  <option value="Kuwait">
-  <option value="Laos">
-  <option value="Lesoto">
-  <option value="Letonia">
-  <option value="Líbano">
-  <option value="Liberia">
-  <option value="Libia">
-  <option value="Liechtenstein">
-  <option value="Lituania">
-  <option value="Luxemburgo">
-  <option value="Madagascar">
-  <option value="Malasia">
-  <option value="Malaui">
-  <option value="Maldivas">
-  <option value="Malí">
-  <option value="Malta">
-  <option value="Marruecos">
-  <option value="Mauricio">
-  <option value="Mauritania">
-  <option value="México">
-  <option value="Micronesia">
-  <option value="Moldavia">
-  <option value="Mónaco">
-  <option value="Mongolia">
-  <option value="Montenegro">
-  <option value="Mozambique">
-  <option value="Namibia">
-  <option value="Nauru">
-  <option value="Nepal">
-  <option value="Nicaragua">
-  <option value="Níger">
-  <option value="Nigeria">
-  <option value="Noruega">
-  <option value="Nueva Zelanda">
-  <option value="Omán">
-  <option value="Países Bajos">
-  <option value="Pakistán">
-  <option value="Palaos">
-  <option value="Panamá">
-  <option value="Papúa Nueva Guinea">
-  <option value="Paraguay">
-  <option value="Perú">
-  <option value="Polonia">
-  <option value="Portugal">
-  <option value="Reino Unido">
-  <option value="República Centroafricana">
-  <option value="República Checa">
-  <option value="República del Congo">
-  <option value="República Democrática del Congo">
-  <option value="República Dominicana">
-  <option value="Ruanda">
-  <option value="Rumanía">
-  <option value="Rusia">
-  <option value="Samoa">
-  <option value="San Cristóbal y Nieves">
-  <option value="San Marino">
-  <option value="San Vicente y las Granadinas">
-  <option value="Santa Lucía">
-  <option value="Santo Tomé y Príncipe">
-  <option value="Senegal">
-  <option value="Serbia">
-  <option value="Seychelles">
-  <option value="Sierra Leona">
-  <option value="Singapur">
-  <option value="Siria">
-  <option value="Somalia">
-  <option value="Sri Lanka">
-  <option value="Sudáfrica">
-  <option value="Sudán">
-  <option value="Sudán del Sur">
-  <option value="Suecia">
-  <option value="Suiza">
-  <option value="Surinam">
-  <option value="Tailandia">
-  <option value="Tanzania">
-  <option value="Tayikistán">
-  <option value="Timor Oriental">
-  <option value="Togo">
-  <option value="Tonga">
-  <option value="Trinidad y Tobago">
-  <option value="Túnez">
-  <option value="Turkmenistán">
-  <option value="Turquía">
-  <option value="Tuvalu">
-  <option value="Ucrania">
-  <option value="Uganda">
-  <option value="Uruguay">
-  <option value="Uzbekistán">
-  <option value="Vanuatu">
-  <option value="Vaticano">
-  <option value="Venezuela">
-  <option value="Vietnam">
-  <option value="Yemen">
-  <option value="Yibuti">
-  <option value="Zambia">
-  <option value="Zimbabue">
+        <option value="Albania">
+        <option value="Alemania">
+        <option value="Andorra">
+        <option value="Angola">
       </datalist>
       <input type="number" name="edad" placeholder="Edad" required min="1" max="120" />
+
+      <!-- Selector emojis -->
+      <label for="emoji" style="margin-top:0.5rem; font-weight:bold; color:#2e3c4f;">¿Cómo te sientes respecto a tu sueño?</label>
+      <div class="emoji-selector" role="radiogroup" aria-label="Seleccione un emoji que represente su sueño">
+        <button type="button" data-emoji="😁" aria-pressed="false" title="Muy bien" tabindex="0">😁</button>
+        <button type="button" data-emoji="😐" aria-pressed="false" title="Neutro" tabindex="-1">😐</button>
+        <button type="button" data-emoji="☹️" aria-pressed="false" title="Mal" tabindex="-1">☹️</button>
+        
+      </div>
+      <div class="emoji-error" id="emoji-error">Por favor, selecciona un emoji.</div>
+
+      <!-- Campo oculto para enviar el emoji seleccionado -->
+      <input type="hidden" name="emoji" id="emoji-input" />
+      
       <button type="submit">Quiero mejorar mi sueño</button>
     </form>
   </section>
@@ -437,12 +324,15 @@
   const form = document.getElementById('formulario');
   const mensaje = document.getElementById('mensaje');
   const cerrarBtn = document.getElementById('cerrarBtn');
+  const emojiButtons = document.querySelectorAll('.emoji-selector button');
+  const emojiInput = document.getElementById('emoji-input');
+  const emojiError = document.getElementById('emoji-error');
 
   // Función que valida todos los campos y aplica clases valid/invalid
   function validarCampos() {
     let valido = true;
     Array.from(form.elements).forEach(el => {
-      if (el.tagName === "INPUT") {
+      if (el.tagName === "INPUT" && el.type !== "hidden") {
         if (!el.checkValidity()) {
           el.classList.add("invalid");
           el.classList.remove("valid");
@@ -453,12 +343,19 @@
         }
       }
     });
+    // Validar que se haya seleccionado emoji
+    if (!emojiInput.value) {
+      emojiError.style.display = "block";
+      valido = false;
+    } else {
+      emojiError.style.display = "none";
+    }
     return valido;
   }
 
   // Validación en tiempo real al cambiar cualquier input
   Array.from(form.elements).forEach(el => {
-    if (el.tagName === "INPUT") {
+    if (el.tagName === "INPUT" && el.type !== "hidden") {
       el.addEventListener('input', () => {
         if (!el.checkValidity()) {
           el.classList.add("invalid");
@@ -469,6 +366,24 @@
         }
       });
     }
+  });
+
+  // Manejar selección de emojis
+  emojiButtons.forEach((btn, idx) => {
+    btn.addEventListener('click', () => {
+      // Deseleccionar todos
+      emojiButtons.forEach(b => {
+        b.classList.remove('selected');
+        b.setAttribute('aria-pressed', 'false');
+        b.setAttribute('tabindex', '-1');
+      });
+      // Seleccionar el clickeado
+      btn.classList.add('selected');
+      btn.setAttribute('aria-pressed', 'true');
+      btn.setAttribute('tabindex', '0');
+      emojiInput.value = btn.dataset.emoji;
+      emojiError.style.display = "none";
+    });
   });
 
   form.addEventListener('submit', function(e) {
@@ -489,15 +404,23 @@
   cerrarBtn.addEventListener('click', function() {
     mensaje.classList.remove('visible');
     form.reset();
+    emojiInput.value = '';
+    emojiError.style.display = "none";
     Array.from(form.elements).forEach(el => {
-      if (el.tagName === "INPUT") {
+      if (el.tagName === "INPUT" && el.type !== "hidden") {
         el.classList.remove("valid", "invalid");
       }
     });
+    // Deseleccionar emojis
+    emojiButtons.forEach(b => {
+      b.classList.remove('selected');
+      b.setAttribute('aria-pressed', 'false');
+      b.setAttribute('tabindex', '-1');
+    });
+    // Para accesibilidad, el primer botón queda con tabindex=0
+    if(emojiButtons.length) emojiButtons[0].setAttribute('tabindex', '0');
   });
-</script>
+  </script>
 
 </body>
 </html>
-
-
