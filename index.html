@@ -8,6 +8,15 @@
   <title>Duerme Mejor | Consejos, herramientas y guía para dormir mejor</title>
   <meta name="description" content="Descubre herramientas efectivas para dormir mejor. Participá gratis en una nueva app enfocada en mejorar tu calidad de sueño.">
   <link rel="icon" href="data:," />
+<!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-492505918"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+
   <style>
     /* tus estilos siguen aquí */
 
@@ -612,3 +621,20 @@
 
 </body>
 </html>
+
+
+
+
+
+
+function doPost(e) {
+  const nombre = e.parameter.nombre;
+  const correo = e.parameter.correo;
+  const pais = e.parameter.pais;
+  const edad = e.parameter.edad;
+
+  const ss = SpreadsheetApp.openById("1jMjoYynnDLVA-TXG2FxD2yTBHTNncwBXDzDi7imxgzk");
+  const hoja = ss.getSheetByName("Hoja 1");
+  hoja.appendRow([new Date(), nombre, correo, pais, edad]);
+}
+
