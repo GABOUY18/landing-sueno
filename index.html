@@ -627,14 +627,4 @@
 
 
 
-function doPost(e) {
-  const nombre = e.parameter.nombre;
-  const correo = e.parameter.correo;
-  const pais = e.parameter.pais;
-  const edad = e.parameter.edad;
-
-  const ss = SpreadsheetApp.openById("1jMjoYynnDLVA-TXG2FxD2yTBHTNncwBXDzDi7imxgzk");
-  const hoja = ss.getSheetByName("Hoja 1");
-  hoja.appendRow([new Date(), nombre, correo, pais, edad]);
-}
 
